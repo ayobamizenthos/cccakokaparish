@@ -39,7 +39,7 @@ const BlogPost: React.FC = () => {
       try {
         await navigator.share({
           title: post?.title,
-          text: post?.excerpt,
+          text: post?.excerpt || post?.title,
           url: window.location.href,
         });
       } catch (error) {
@@ -96,9 +96,11 @@ const BlogPost: React.FC = () => {
           </Link>
 
           <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <Badge variant="secondary">{post.category}</Badge>
-            </div>
+            {post.category && (
+              <div className="flex items-center gap-2">
+                <Badge variant="secondary">{post.category}</Badge>
+              </div>
+            )}
             <Button variant="outline" size="sm" onClick={handleShare}>
               <Share2 className="h-4 w-4 mr-2" />
               Share
@@ -110,18 +112,22 @@ const BlogPost: React.FC = () => {
           </h1>
 
           <div className="flex items-center gap-6 text-gray-600 mb-6">
-            <span className="flex items-center gap-2">
-              <User className="h-5 w-5" />
-              {post.author}
-            </span>
-            <span className="flex items-center gap-2">
-              <Calendar className="h-5 w-5" />
-              {post.publishedAt.toDate().toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </span>
+            {post.author && (
+              <span className="flex items-center gap-2">
+                <User className="h-5 w-5" />
+                {post.author}
+              </span>
+            )}
+            {post.publishedAt && (
+              <span className="flex items-center gap-2">
+                <Calendar className="h-5 w-5" />
+                {post.publishedAt.toDate().toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
+            )}
           </div>
 
           {post.tags && post.tags.length > 0 && (
@@ -148,7 +154,9 @@ const BlogPost: React.FC = () => {
 
         <Card>
           <CardContent className="prose prose-lg max-w-none p-8">
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            {post.content && (
+              <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            )}
           </CardContent>
         </Card>
 

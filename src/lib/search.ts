@@ -28,39 +28,35 @@ class SearchEngine {
 
   async initialize() {
     // Load all searchable content
-    const [blogPosts, newsItems, events] = await Promise.all([
-      searchContent('', 'blog'),
-      searchContent('', 'news'),
-      searchContent('', 'events')
-    ]);
+    const results = await searchContent('');
 
     this.searchData = [
-      ...blogPosts.map((post: BlogPost) => ({
-        id: post.id!,
+      ...results.posts.map((post: BlogPost) => ({
+        id: post.id,
         title: post.title,
-        content: post.content,
+        content: post.content || '',
         type: 'blog' as const,
         category: post.category,
         tags: post.tags,
-        date: post.publishedAt.toDate(),
+        date: post.publishedAt?.toDate() || new Date(),
         excerpt: post.excerpt
       })),
-      ...newsItems.map((news: NewsItem) => ({
-        id: news.id!,
+      ...results.news.map((news: NewsItem) => ({
+        id: news.id,
         title: news.title,
-        content: news.content,
+        content: news.content || '',
         type: 'news' as const,
         category: news.category,
-        date: news.publishedAt.toDate(),
+        date: news.publishedAt?.toDate() || new Date(),
         excerpt: news.excerpt
       })),
-      ...events.map((event: Event) => ({
-        id: event.id!,
+      ...results.events.map((event: Event) => ({
+        id: event.id,
         title: event.title,
-        content: event.description,
+        content: event.description || '',
         type: 'event' as const,
         category: event.category,
-        date: event.date.toDate()
+        date: event.date?.toDate() || new Date()
       }))
     ];
 
@@ -107,7 +103,7 @@ class SearchEngine {
   getCategories(type?: 'blog' | 'news' | 'event'): string[] {
     const filtered = type ? this.searchData.filter(item => item.type === type) : this.searchData;
     const categories = new Set(filtered.map(item => item.category).filter(Boolean));
-    return Array.from(categories);
+    return Array.from(categories) as string[];
   }
 
   getTags(): string[] {

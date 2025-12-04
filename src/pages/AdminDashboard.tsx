@@ -26,9 +26,6 @@ import {
   getNewsItems,
   getEvents,
   getFeedback,
-  createBlogPost,
-  updateBlogPost,
-  deleteBlogPost,
   updateFeedbackStatus,
   getFeedbackStats,
   BlogPost,
@@ -75,7 +72,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleFeedbackStatusUpdate = async (id: string, status: Feedback['status']) => {
     try {
-      await updateFeedbackStatus(id, status, undefined, undefined, 'admin');
+      await updateFeedbackStatus(id, status);
       trackAdminAction('update_feedback_status', { feedbackId: id, status });
       fetchData();
     } catch (error) {
@@ -221,13 +218,13 @@ const AdminDashboard: React.FC = () => {
                   {blogPosts.map((post) => (
                     <TableRow key={post.id}>
                       <TableCell className="font-medium">{post.title}</TableCell>
-                      <TableCell>{post.author}</TableCell>
+                      <TableCell>{post.author || '-'}</TableCell>
                       <TableCell>
                         <Badge variant={post.status === 'published' ? 'default' : 'secondary'}>
-                          {post.status}
+                          {post.status || 'draft'}
                         </Badge>
                       </TableCell>
-                      <TableCell>{post.publishedAt.toDate().toLocaleDateString()}</TableCell>
+                      <TableCell>{post.publishedAt?.toDate().toLocaleDateString() || '-'}</TableCell>
                       <TableCell>
                         <div className="flex gap-2">
                           <Button variant="ghost" size="sm">

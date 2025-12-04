@@ -14,7 +14,7 @@ const Blog: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const blogPosts = await getBlogPosts('published');
+        const blogPosts = await getBlogPosts();
         setPosts(blogPosts);
       } catch (error) {
         console.error('Failed to fetch blog posts:', error);
@@ -66,9 +66,11 @@ const Blog: React.FC = () => {
                 </div>
               )}
               <CardHeader>
-                <div className="flex items-center gap-2 mb-2">
-                  <Badge variant="secondary">{post.category}</Badge>
-                </div>
+                {post.category && (
+                  <div className="flex items-center gap-2 mb-2">
+                    <Badge variant="secondary">{post.category}</Badge>
+                  </div>
+                )}
                 <CardTitle className="text-xl">
                   <Link
                     to={`/blog/${post.slug}`}
@@ -79,20 +81,26 @@ const Blog: React.FC = () => {
                   </Link>
                 </CardTitle>
                 <div className="flex items-center gap-4 text-sm text-gray-500">
-                  <span className="flex items-center gap-1">
-                    <User className="h-4 w-4" />
-                    {post.author}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    {post.publishedAt.toDate().toLocaleDateString()}
-                  </span>
+                  {post.author && (
+                    <span className="flex items-center gap-1">
+                      <User className="h-4 w-4" />
+                      {post.author}
+                    </span>
+                  )}
+                  {post.publishedAt && (
+                    <span className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      {post.publishedAt.toDate().toLocaleDateString()}
+                    </span>
+                  )}
                 </div>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-700 mb-4 line-clamp-3">
-                  {post.excerpt}
-                </p>
+                {post.excerpt && (
+                  <p className="text-gray-700 mb-4 line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                )}
                 {post.tags && post.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-4">
                     {post.tags.map(tag => (
