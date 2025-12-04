@@ -1,6 +1,4 @@
-import * as Sentry from '@sentry/browser';
-import { BrowserTracing } from '@sentry/tracing';
-import { Replay } from '@sentry/replay';
+import * as Sentry from '@sentry/react';
 
 export const initializeSentry = () => {
   const dsn = import.meta.env.VITE_SENTRY_DSN;
@@ -9,22 +7,19 @@ export const initializeSentry = () => {
     Sentry.init({
       dsn,
       integrations: [
-        new BrowserTracing({
-          tracePropagationTargets: ['localhost', /^https:\/\/your-domain\.com/],
-        }),
-        new Replay({
+        Sentry.browserTracingIntegration(),
+        Sentry.replayIntegration({
           maskAllText: true,
           blockAllMedia: true,
         }),
       ],
       // Performance Monitoring
-      tracesSampleRate: 1.0, // Capture 100% of the transactions
+      tracesSampleRate: 1.0,
       // Session Replay
-      replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%
-      replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+      replaysSessionSampleRate: 0.1,
+      replaysOnErrorSampleRate: 1.0,
       environment: import.meta.env.VITE_NODE_ENV || 'development',
       beforeSend(event) {
-        // Filter out development errors in production
         if (import.meta.env.DEV && event.exception) {
           return null;
         }
@@ -34,7 +29,7 @@ export const initializeSentry = () => {
   }
 };
 
-export const captureException = (error: Error, context?: Record<string, any>) => {
+export const captureException = (error: Error, context?: Record<string, unknown>) => {
   if (import.meta.env.PROD) {
     Sentry.captureException(error, {
       tags: {
@@ -47,7 +42,7 @@ export const captureException = (error: Error, context?: Record<string, any>) =>
   }
 };
 
-export const captureMessage = (message: string, level: Sentry.SeverityLevel = 'info', context?: Record<string, any>) => {
+export const captureMessage = (message: string, level: Sentry.SeverityLevel = 'info', context?: Record<string, unknown>) => {
   if (import.meta.env.PROD) {
     Sentry.withScope((scope) => {
       scope.setTags({
