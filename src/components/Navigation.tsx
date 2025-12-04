@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import LazyImage from "./LazyImage";
 import { motion, AnimatePresence } from "framer-motion";
-import DarkModeToggle from "./DarkModeToggle";
 
 const Navigation = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,26 +19,12 @@ const Navigation = memo(() => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Focus management for mobile menu
   useEffect(() => {
     if (isMobileMenuOpen && firstMenuItemRef.current) {
       firstMenuItemRef.current.focus();
-      // Announce menu opening to screen readers
-      const announcement = document.createElement('div');
-      announcement.setAttribute('aria-live', 'polite');
-      announcement.setAttribute('aria-atomic', 'true');
-      announcement.style.position = 'absolute';
-      announcement.style.left = '-10000px';
-      announcement.style.width = '1px';
-      announcement.style.height = '1px';
-      announcement.style.overflow = 'hidden';
-      announcement.textContent = 'Navigation menu opened';
-      document.body.appendChild(announcement);
-      setTimeout(() => document.body.removeChild(announcement), 1000);
     }
   }, [isMobileMenuOpen]);
 
-  // Handle escape key to close mobile menu
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && isMobileMenuOpen) {
@@ -61,7 +46,7 @@ const Navigation = memo(() => {
     { name: "Events", href: "#events" },
     { name: "Sermons", href: "/sermons", isRoute: true },
     { name: "Blog", href: "/blog", isRoute: true },
-    { name: "Choir & Media Team", href: "/choir-media", isRoute: true },
+    { name: "Choir & Media", href: "/choir-media", isRoute: true },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -69,74 +54,74 @@ const Navigation = memo(() => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
         isScrolled
-          ? "bg-primary/98 backdrop-blur-luxury shadow-elegant"
-          : "bg-transparent"
+          ? "bg-background/95 backdrop-blur-luxury shadow-elegant border-b border-secondary/10"
+          : "bg-gradient-to-b from-background/80 to-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
+          {/* Logo */}
           <Link to="/" className="flex flex-col items-center group pt-2">
-            <LazyImage
-              src="/ccc-rainbow-logo.png"
-              alt="Celestial Church of Christ Logo"
-              className="h-20 md:h-24 w-auto object-contain transition-all duration-500 group-hover:scale-105 group-hover:drop-shadow-glow"
-            />
-            <div className="text-sm md:text-base font-heading font-light tracking-luxury text-secondary -mt-1">
-              Akoka Parish
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <LazyImage
+                src="/ccc-rainbow-logo.png"
+                alt="Celestial Church of Christ Logo"
+                className="h-16 md:h-20 w-auto object-contain transition-all duration-500 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
+              />
+            </motion.div>
+            <span className="text-xs md:text-sm font-heading font-medium tracking-luxury text-secondary mt-1">
+              AKOKA PARISH
+            </span>
           </Link>
 
-          <div className="hidden lg:flex items-center space-x-2">
+          {/* Desktop Navigation */}
+          <div className="hidden xl:flex items-center space-x-1">
             {navLinks.map((link) => (
-              link.isRoute ? (
-                <motion.div
-                  key={link.name}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+              <motion.div
+                key={link.name}
+                whileHover={{ y: -2 }}
+                transition={{ duration: 0.2 }}
+              >
+                {link.isRoute ? (
                   <Link
                     to={link.href}
-                    className="px-5 py-2.5 text-sm font-body font-light tracking-editorial text-primary-foreground hover:text-secondary transition-all duration-500 rounded-xl hover:bg-primary-foreground/5"
+                    className="px-4 py-2.5 text-xs font-body font-medium tracking-wider uppercase text-foreground/80 hover:text-secondary transition-all duration-300 relative group"
                   >
                     {link.name}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent group-hover:w-full transition-all duration-500" />
                   </Link>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key={link.name}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                ) : (
                   <a
                     href={link.href}
-                    className="px-5 py-2.5 text-sm font-body font-light tracking-editorial text-primary-foreground hover:text-secondary transition-all duration-500 rounded-xl hover:bg-primary-foreground/5"
+                    className="px-4 py-2.5 text-xs font-body font-medium tracking-wider uppercase text-foreground/80 hover:text-secondary transition-all duration-300 relative group"
                   >
                     {link.name}
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-gradient-to-r from-transparent via-secondary to-transparent group-hover:w-full transition-all duration-500" />
                   </a>
-                </motion.div>
-              )
+                )}
+              </motion.div>
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center space-x-4">
-            <DarkModeToggle />
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button variant="outline" size="sm" className="border-2 border-secondary/60 text-secondary hover:bg-secondary/10 hover:border-secondary font-light tracking-wide" aria-label="Join live service">
+          {/* Desktop Actions */}
+          <div className="hidden xl:flex items-center space-x-4">
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-2 border-secondary/50 text-secondary hover:bg-secondary/10 hover:border-secondary font-heading tracking-wider text-xs uppercase px-6"
+              >
                 Join Live
               </Button>
             </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="sm"
-                className="bg-secondary text-primary hover:bg-secondary/90 shadow-glow font-medium tracking-wide"
+                className="bg-gradient-to-r from-secondary to-accent text-background font-heading tracking-wider text-xs uppercase px-6 shadow-glow hover:shadow-[0_0_40px_rgba(212,175,55,0.5)] transition-all duration-500"
                 asChild
-                aria-label="Send donation request email"
               >
                 <a href="mailto:cccakokaparish@yahoo.com?subject=Request for Church Account Details&body=Hello, I'd like to request the account details for making a donation to CCC Akoka Parish. Thank you.">
                   Donate
@@ -145,16 +130,15 @@ const Navigation = memo(() => {
             </motion.div>
           </div>
 
+          {/* Mobile Menu Button */}
           <motion.button
-            className="lg:hidden p-2 text-foreground"
+            className="xl:hidden p-3 text-foreground hover:text-secondary transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
-            transition={{ duration: 0.3 }}
           >
             <AnimatePresence mode="wait">
               {isMobileMenuOpen ? (
@@ -165,7 +149,7 @@ const Navigation = memo(() => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X size={24} />
+                  <X size={28} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -175,19 +159,20 @@ const Navigation = memo(() => {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu size={24} />
+                  <Menu size={28} />
                 </motion.div>
               )}
             </AnimatePresence>
           </motion.button>
         </div>
 
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
               ref={mobileMenuRef}
               id="mobile-navigation"
-              className="lg:hidden py-4 bg-background/95 backdrop-blur-md"
+              className="xl:hidden py-6 bg-background/98 backdrop-blur-luxury border-t border-secondary/10"
               role="navigation"
               aria-label="Mobile navigation menu"
               initial={{ opacity: 0, height: 0 }}
@@ -196,77 +181,59 @@ const Navigation = memo(() => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             >
               <motion.div
-                className="flex flex-col space-y-2"
+                className="flex flex-col space-y-1"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
               >
                 {navLinks.map((link, index) => (
-                  link.isRoute ? (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                    >
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05, duration: 0.3 }}
+                  >
+                    {link.isRoute ? (
                       <Link
                         ref={index === 0 ? firstMenuItemRef : null}
                         to={link.href}
-                        className="px-4 py-3 text-sm font-medium text-foreground hover:text-secondary hover:bg-muted rounded-md transition-colors block"
+                        className="px-4 py-3 text-sm font-heading tracking-wider text-foreground hover:text-secondary hover:bg-secondary/5 rounded-lg transition-all duration-300 block"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {link.name}
                       </Link>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key={link.name}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1, duration: 0.3 }}
-                    >
+                    ) : (
                       <a
                         ref={index === 0 ? firstMenuItemRef : null}
                         href={link.href}
-                        className="px-4 py-3 text-sm font-medium text-foreground hover:text-secondary hover:bg-muted rounded-md transition-colors block"
+                        className="px-4 py-3 text-sm font-heading tracking-wider text-foreground hover:text-secondary hover:bg-secondary/5 rounded-lg transition-all duration-300 block"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {link.name}
                       </a>
-                    </motion.div>
-                  )
+                    )}
+                  </motion.div>
                 ))}
                 <motion.div
-                  className="px-4 pt-4 flex flex-col space-y-2"
+                  className="px-4 pt-6 flex flex-col space-y-3"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: navLinks.length * 0.1, duration: 0.3 }}
+                  transition={{ delay: navLinks.length * 0.05, duration: 0.3 }}
                 >
-                  <div className="flex justify-center mb-4">
-                    <DarkModeToggle />
-                  </div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-2 border-secondary/50 text-secondary hover:bg-secondary/10 font-heading tracking-wider"
                   >
-                    <Button variant="outline" className="w-full border-secondary text-secondary" aria-label="Join live service">
-                      Join Live
-                    </Button>
-                  </motion.div>
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                    Join Live
+                  </Button>
+                  <Button
+                    className="w-full bg-gradient-to-r from-secondary to-accent text-background font-heading tracking-wider shadow-glow"
+                    asChild
                   >
-                    <Button
-                      className="w-full bg-gradient-to-r from-secondary to-accent text-primary"
-                      asChild
-                      aria-label="Send donation request email"
-                    >
-                      <a href="mailto:cccakokaparish@yahoo.com?subject=Request for Church Account Details&body=Hello, I'd like to request the account details for making a donation to CCC Akoka Parish. Thank you.">
-                        Donate
-                      </a>
-                    </Button>
-                  </motion.div>
+                    <a href="mailto:cccakokaparish@yahoo.com?subject=Request for Church Account Details&body=Hello, I'd like to request the account details for making a donation to CCC Akoka Parish. Thank you.">
+                      Donate
+                    </a>
+                  </Button>
                 </motion.div>
               </motion.div>
             </motion.div>
