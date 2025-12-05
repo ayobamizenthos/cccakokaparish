@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaPlay, FaChevronDown, FaCalendarAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { Play, ArrowDown } from "lucide-react";
 import churchExterior from "@/assets/church-exterior-glade.jpg";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLDivElement>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // Countdown to Dec 7th
@@ -32,241 +27,107 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Premium Animations
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Parallax effect on scroll
-      gsap.to(".hero-bg", {
-        yPercent: 20,
-        ease: "none",
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-      
-      // Animate the cross
-      gsap.fromTo(".hero-cross",
-        { scale: 0, opacity: 0, rotation: -180 },
-        { scale: 1, opacity: 1, rotation: 0, duration: 1.5, ease: "elastic.out(1, 0.5)", delay: 0.3 }
-      );
-      
-      // Animate the rays
-      gsap.fromTo(".hero-rays",
-        { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 2, ease: "power2.out", delay: 0.6 }
-      );
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
+  const scrollToContent = () => {
+    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section
-      ref={heroRef} 
-      className="relative w-full min-h-screen overflow-hidden"
-    >
-      {/* Background - Church Exterior Image with Parallax */}
-      <div className="hero-bg absolute inset-0">
-        {/* Main Background Image */}
+    <section ref={heroRef} className="relative w-full min-h-screen overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${churchExterior})` }}
         />
-        
-        {/* Dark Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
-        
-        {/* Golden Light Overlay from Top */}
-        <div 
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(ellipse 120% 70% at 50% -20%, hsl(43 90% 52% / 0.2) 0%, transparent 50%),
-              radial-gradient(ellipse 80% 50% at 50% 0%, hsl(45 95% 65% / 0.15) 0%, transparent 40%)
-            `
-          }}
-        />
-        
-        {/* Subtle ambient glow */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[hsl(43,90%,52%)] rounded-full filter blur-[200px] opacity-[0.08] animate-float" />
-        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[hsl(210,70%,48%)] rounded-full filter blur-[200px] opacity-[0.05] animate-float-subtle" style={{ animationDelay: '-3s' }} />
-        
-        {/* Cross Pattern Overlay - Gold */}
-        <div className="absolute inset-0 opacity-[0.02] cross-pattern" />
-        
-        {/* Vignette */}
-        <div className="absolute inset-0 shadow-[inset_0_0_200px_rgba(0,0,0,0.5)]" />
-      </div>
-
-      {/* Animated Divine Rays */}
-      <div className="hero-rays absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
-        <div 
-          className="absolute w-[200%] h-[200%] animate-divine-rays"
-          style={{
-            background: `
-              conic-gradient(
-                from 0deg at 50% 50%,
-                transparent 0deg,
-                hsl(43 90% 52% / 0.02) 15deg,
-                transparent 30deg,
-                hsl(43 90% 52% / 0.02) 45deg,
-                transparent 60deg,
-                hsl(43 90% 52% / 0.02) 75deg,
-                transparent 90deg,
-                hsl(43 90% 52% / 0.02) 105deg,
-                transparent 120deg,
-                hsl(43 90% 52% / 0.02) 135deg,
-                transparent 150deg,
-                hsl(43 90% 52% / 0.02) 165deg,
-                transparent 180deg,
-                hsl(43 90% 52% / 0.02) 195deg,
-                transparent 210deg,
-                hsl(43 90% 52% / 0.02) 225deg,
-                transparent 240deg,
-                hsl(43 90% 52% / 0.02) 255deg,
-                transparent 270deg,
-                hsl(43 90% 52% / 0.02) 285deg,
-                transparent 300deg,
-                hsl(43 90% 52% / 0.02) 315deg,
-                transparent 330deg,
-                hsl(43 90% 52% / 0.02) 345deg,
-                transparent 360deg
-              )
-            `
-          }}
-        />
-      </div>
-
-      {/* Decorative Gold Cross */}
-      <div className="hero-cross absolute top-[12%] left-1/2 -translate-x-1/2 opacity-0 pointer-events-none z-10">
-        <div className="relative">
-          {/* Cross Glow */}
-          <div className="absolute inset-0 blur-xl animate-pulse-gold">
-            <div className="w-1.5 h-28 bg-gradient-to-b from-transparent via-[hsl(43,90%,52%)] to-transparent mx-auto" />
-            <div className="w-20 h-1.5 bg-gradient-to-r from-transparent via-[hsl(43,90%,52%)] to-transparent absolute top-7 left-1/2 -translate-x-1/2" />
-          </div>
-          {/* Cross Main */}
-          <div className="relative animate-cross-glow">
-            <div className="w-1.5 h-28 bg-gradient-to-b from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(40,85%,42%)] mx-auto rounded-full" />
-            <div className="w-20 h-1.5 bg-gradient-to-r from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(40,85%,42%)] absolute top-7 left-1/2 -translate-x-1/2 rounded-full" />
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Gold Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1.5 h-1.5 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              background: `hsl(43 90% ${50 + Math.random() * 20}%)`,
-            }}
-            animate={{
-              y: [0, -80, 0],
-              opacity: [0, 0.6, 0],
-              scale: [0.5, 1, 0.5],
-            }}
-            transition={{
-              duration: 5 + Math.random() * 5,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
+        {/* Sophisticated Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-center px-4 py-32">
-        <div ref={textRef} className="max-w-5xl mx-auto">
-          {/* Pre-title Badge */}
-          <motion.div
+      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-center px-6 py-32">
+        <div className="max-w-4xl mx-auto">
+          {/* Pre-title */}
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            className="mb-10"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-white/70 text-xs tracking-[0.3em] uppercase mb-8 font-light"
+            style={{ fontFamily: 'Inter, sans-serif' }}
           >
-            <span className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/10 border border-[hsl(43,90%,52%,0.5)] backdrop-blur-md">
-              <span className="w-2 h-2 bg-[hsl(43,90%,52%)] rounded-full animate-pulse" />
-              <span className="text-[hsl(43,90%,70%)] text-xs font-semibold tracking-[0.25em] uppercase">
-                The Latter House Glory
-              </span>
-            </span>
-          </motion.div>
+            Celestial Church of Christ • Akoka Parish
+          </motion.p>
 
           {/* Main Title */}
           <motion.h1 
-            className="leading-none mb-8"
-            initial={{ opacity: 0, y: 40 }}
+            className="mb-6"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 1, ease: "easeOut" }}
+            transition={{ delay: 0.5, duration: 1 }}
           >
-            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-wide text-gradient-gold drop-shadow-[0_4px_30px_rgba(210,172,71,0.4)]">
+            <span 
+              className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white"
+              style={{ fontFamily: 'Cinzel, serif' }}
+            >
               GLADE
             </span>
-            <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[0.15em] text-white drop-shadow-[0_2px_20px_rgba(255,255,255,0.3)] mt-2">
+            <span 
+              className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.1em] text-white/90 mt-2"
+              style={{ fontFamily: 'Cinzel, serif' }}
+            >
               CATHEDRAL
             </span>
           </motion.h1>
 
-          {/* Gold Decorative Line */}
+          {/* Gold Line */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
-            className="flex items-center justify-center gap-4 my-8"
-          >
-            <div className="w-20 sm:w-32 h-px bg-gradient-to-r from-transparent via-[hsl(43,90%,52%)] to-[hsl(43,90%,52%)]" />
-            <div className="w-3 h-3 rotate-45 bg-[hsl(43,90%,52%)] shadow-[0_0_20px_hsl(43,90%,52%,0.7)]" />
-            <div className="w-20 sm:w-32 h-px bg-gradient-to-l from-transparent via-[hsl(43,90%,52%)] to-[hsl(43,90%,52%)]" />
-          </motion.div>
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="w-24 h-px bg-[hsl(38,75%,50%)] mx-auto my-10"
+          />
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-white/90 font-light tracking-wide max-w-2xl mx-auto mb-12 drop-shadow-lg"
+            className="text-lg md:text-xl text-white/80 font-light max-w-2xl mx-auto mb-16"
+            style={{ fontFamily: 'Cormorant Garamond, serif' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
           >
-            Experience the divine presence at Celestial Church of Christ, Akoka Parish — 
-            where heaven meets earth in sacred worship and celestial celebration.
+            The Last Ark of Salvation — where heaven meets earth in sacred worship and celestial celebration.
           </motion.p>
 
           {/* Countdown */}
           <motion.div
-            className="mb-12"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-[hsl(43,90%,70%)] mb-6">
+            <p 
+              className="text-[hsl(38,75%,60%)] text-xs tracking-[0.25em] uppercase mb-8"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
               Annual Harvest Thanksgiving
             </p>
-            <div className="inline-flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center justify-center gap-4 sm:gap-6">
               {[
                 { val: timeLeft.days, label: "Days" },
                 { val: timeLeft.hours, label: "Hours" },
                 { val: timeLeft.minutes, label: "Mins" },
                 { val: timeLeft.seconds, label: "Secs" }
               ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center">
-                  <div className="relative">
-                    <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-black/40 border-2 border-[hsl(43,90%,52%,0.5)] shadow-[0_8px_32px_rgba(0,0,0,0.3)] flex items-center justify-center backdrop-blur-md">
-                      <span className="text-2xl sm:text-3xl font-bold text-gradient-gold tabular-nums drop-shadow-lg">
-                        {String(item.val).padStart(2, '0')}
-                      </span>
-                    </div>
-                    {/* Corner accents */}
-                    <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-[hsl(43,90%,52%,0.7)] rounded-tr-lg" />
-                    <div className="absolute -bottom-px -left-px w-4 h-4 border-b-2 border-l-2 border-[hsl(43,90%,52%,0.7)] rounded-bl-lg" />
+                <div key={i} className="text-center">
+                  <div 
+                    className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tabular-nums mb-2"
+                    style={{ fontFamily: 'Cinzel, serif' }}
+                  >
+                    {String(item.val).padStart(2, '0')}
                   </div>
-                  <span className="text-[10px] sm:text-xs uppercase tracking-widest text-white/80 mt-3 font-medium">
+                  <span 
+                    className="text-[10px] uppercase tracking-[0.2em] text-white/50"
+                    style={{ fontFamily: 'Inter, sans-serif' }}
+                  >
                     {item.label}
                   </span>
                 </div>
@@ -276,50 +137,44 @@ const Hero = () => {
 
           {/* CTA Buttons */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.4, duration: 0.8 }}
           >
-            <motion.button
-              className="btn-gold flex items-center justify-center gap-3"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FaPlay size={12} />
-              <span>Watch Harvest Live</span>
-            </motion.button>
-            <motion.button
-              className="btn-dark flex items-center justify-center gap-3"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <FaCalendarAlt size={14} />
-              <span>View Itinerary</span>
-            </motion.button>
+            <button className="btn-gold flex items-center justify-center gap-3">
+              <Play size={14} />
+              <span>Watch Live</span>
+            </button>
+            <button className="btn-outline border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center gap-3">
+              <span>View Schedule</span>
+            </button>
           </motion.div>
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        <motion.button
+          onClick={scrollToContent}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.6, duration: 1 }}
+          transition={{ delay: 1.8, duration: 1 }}
         >
           <motion.div
-            className="flex flex-col items-center gap-2 text-white/70 cursor-pointer hover:text-[hsl(43,90%,60%)] transition-colors"
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-3"
           >
-            <span className="text-[10px] font-semibold tracking-[0.3em] uppercase">Explore</span>
-            <FaChevronDown size={16} />
+            <span 
+              className="text-[10px] tracking-[0.3em] uppercase"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              Explore
+            </span>
+            <ArrowDown size={16} />
           </motion.div>
-        </motion.div>
+        </motion.button>
       </div>
-
-      {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
     </section>
   );
 };

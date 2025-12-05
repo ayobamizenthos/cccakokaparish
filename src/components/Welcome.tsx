@@ -10,91 +10,57 @@ const Welcome = () => {
   const stats = [
     { label: "Years of Ministry", value: 50, suffix: "+" },
     { label: "Active Members", value: 2000, suffix: "+" },
-    { label: "Weekly Services", value: 7 },
+    { label: "Weekly Services", value: 7, suffix: "" },
     { label: "Community Impact", value: 10000, suffix: "+" },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  };
-
   return (
-    <section id="about" className="py-32 relative overflow-hidden bg-white">
-      {/* Premium Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-[hsl(45,30%,98%)] to-white" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[hsl(43,90%,52%)] rounded-full filter blur-[250px] opacity-[0.06]" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[hsl(210,70%,48%)] rounded-full filter blur-[200px] opacity-[0.04]" />
-        <div className="absolute inset-0 opacity-[0.02] cross-pattern" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="about" className="py-28 md:py-36 bg-white">
+      <div className="container mx-auto px-6">
         <motion.div
           ref={ref}
-          className="max-w-6xl mx-auto text-center space-y-12"
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          className="max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <div className="space-y-6">
-            <motion.span
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-[hsl(43,90%,52%,0.1)] border border-[hsl(43,90%,52%,0.3)]"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6 }}
+          {/* Header */}
+          <div className="text-center mb-20">
+            <motion.p
+              className="premium-label mb-6"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: 0.2 }}
             >
-              <span className="w-2 h-2 bg-[hsl(43,90%,52%)] rounded-full animate-pulse" />
-              <span className="text-[hsl(40,85%,35%)] text-xs font-semibold tracking-[0.2em] uppercase">
-                About Our Parish
-              </span>
-            </motion.span>
+              About Our Parish
+            </motion.p>
             
             <motion.h2
-              className="text-5xl md:text-7xl font-heading font-light tracking-wide leading-tight"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              className="section-title mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <span className="text-gradient-gold">Welcome</span>
-              <span className="text-[hsl(220,20%,25%)]"> to Our </span>
-              <span className="text-[hsl(210,70%,48%)]">Spiritual Home</span>
+              Welcome to Our
+              <br />
+              <span className="text-gradient-gold">Spiritual Home</span>
             </motion.h2>
             
             <motion.div
-              className="flex items-center justify-center gap-4"
+              className="w-16 h-px bg-[hsl(38,75%,50%)] mx-auto"
               initial={{ scaleX: 0 }}
               animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="w-24 h-px bg-gradient-to-r from-transparent to-[hsl(43,90%,52%)]" />
-              <div className="w-3 h-3 rotate-45 bg-[hsl(43,90%,52%)] shadow-[0_0_15px_hsl(43,90%,52%,0.5)]" />
-              <div className="w-24 h-px bg-gradient-to-l from-transparent to-[hsl(43,90%,52%)]" />
-            </motion.div>
+              transition={{ delay: 0.5, duration: 0.6 }}
+            />
           </div>
           
+          {/* Description */}
           <motion.p
-            className="text-xl md:text-2xl text-[hsl(220,15%,45%)] leading-relaxed font-light tracking-wide max-w-4xl mx-auto"
+            className="text-xl md:text-2xl text-center max-w-3xl mx-auto mb-20 leading-relaxed"
+            style={{ fontFamily: 'Cormorant Garamond, serif', color: 'hsl(0 0% 35%)' }}
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
           >
             At Glade Cathedral, we are committed to spreading the gospel of Jesus Christ and
             nurturing spiritual growth in our community. As part of the Celestial Church of Christ,
@@ -102,50 +68,33 @@ const Welcome = () => {
             refuge and spiritual renewal.
           </motion.p>
 
-          {/* Stats Section - Glassmorphism Cards */}
+          {/* Stats */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 py-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            className="grid grid-cols-2 md:grid-cols-4 border border-border rounded-sm"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
           >
             {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="group relative"
-              >
-                <div className="relative p-6 rounded-2xl bg-white/70 backdrop-blur-xl border border-[hsl(43,90%,52%,0.2)] shadow-[0_8px_32px_rgba(210,172,71,0.1)] hover:shadow-[0_16px_48px_rgba(210,172,71,0.2)] hover:border-[hsl(43,90%,52%,0.4)] transition-all duration-500 hover:-translate-y-2">
-                  {/* Gold accent glow */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[hsl(43,90%,52%,0.05)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  
-                  {/* Corner accents */}
-                  <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[hsl(43,90%,52%,0.3)] rounded-tr-2xl" />
-                  <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[hsl(43,90%,52%,0.3)] rounded-bl-2xl" />
-                  
-                  <div className="relative z-10 text-center">
-                    <div className="text-4xl md:text-5xl font-heading font-light text-gradient-gold mb-2">
-                      <AnimatedCounter
-                        value={stat.value}
-                        suffix={stat.suffix}
-                        duration={2000}
-                      />
-                    </div>
-                    <p className="text-sm md:text-base text-[hsl(220,15%,50%)] font-light tracking-wide">
-                      {stat.label}
-                    </p>
-                  </div>
+              <div key={index} className="stat-card">
+                <div className="stat-value">
+                  <AnimatedCounter
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    duration={2000}
+                  />
                 </div>
-              </motion.div>
+                <p className="stat-label">{stat.label}</p>
+              </div>
             ))}
           </motion.div>
 
-          {/* Mission/Vision/Values - Premium Glass Cards */}
+          {/* Mission Cards */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-12"
-            variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            className="grid md:grid-cols-3 gap-8 mt-20"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 1, duration: 0.8 }}
           >
             {[
               { title: "Our Mission", text: "To lead souls to salvation through worship, prayer, and fellowship in the Spirit." },
@@ -154,28 +103,25 @@ const Welcome = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="group relative"
-                whileHover={{ y: -8 }}
+                className="group"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                transition={{ delay: 1 + index * 0.15, duration: 0.6 }}
               >
-                <div className="relative p-10 rounded-3xl bg-white/80 backdrop-blur-2xl border border-[hsl(43,90%,52%,0.15)] shadow-[0_8px_32px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_60px_rgba(210,172,71,0.15)] transition-all duration-700 h-full">
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[hsl(43,90%,52%,0.03)] via-transparent to-[hsl(210,70%,48%,0.02)] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                  
-                  {/* Top gold line */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-[hsl(43,90%,52%)] to-transparent rounded-full" />
-                  
-                  <div className="relative z-10">
-                    <h3 className="text-2xl font-heading font-medium text-[hsl(220,20%,25%)] mb-4 tracking-wide">
-                      {item.title}
-                    </h3>
-                    <motion.div
-                      className="w-12 h-0.5 bg-[hsl(43,90%,52%)] mb-6 group-hover:w-20 transition-all duration-500"
-                    />
-                    <p className="text-base text-[hsl(220,15%,45%)] font-light leading-relaxed">
-                      {item.text}
-                    </p>
-                  </div>
+                <div className="p-8 border border-border rounded-sm hover:border-[hsl(38,75%,50%)] transition-colors duration-500 h-full">
+                  <h3 
+                    className="text-lg font-medium mb-4 tracking-wide"
+                    style={{ fontFamily: 'Cinzel, serif', color: 'hsl(0 0% 8%)' }}
+                  >
+                    {item.title}
+                  </h3>
+                  <div className="w-8 h-px bg-[hsl(38,75%,50%)] mb-5 group-hover:w-12 transition-all duration-500" />
+                  <p 
+                    className="text-base leading-relaxed"
+                    style={{ fontFamily: 'Cormorant Garamond, serif', color: 'hsl(0 0% 40%)' }}
+                  >
+                    {item.text}
+                  </p>
                 </div>
               </motion.div>
             ))}
