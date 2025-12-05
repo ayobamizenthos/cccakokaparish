@@ -3,116 +3,130 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   APEX DESIGN SYSTEM - BILLION DOLLAR COMPETITION GRADE
-   A single, unified, premium theme with maximum visual impact
+   CELESTIAL CHURCH OF CHRIST - AKOKA GLADE CATHEDRAL DESIGN SYSTEM
+   Authentic Blue & White Theme with Premium Apex-Level Aesthetics
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer base {
   :root {
     /* ─────────────────────────────────────────────────────────────────────────
-       CORE PALETTE - Deep Celestial Theme
+       CORE PALETTE - Authentic Celestial Church Colors
+       Based on Akoka Glade Cathedral's actual building colors
        ───────────────────────────────────────────────────────────────────────── */
     
-    /* Base - Rich Midnight */
-    --background: 222 47% 6%;
-    --foreground: 45 30% 96%;
+    /* Base - Deep Celestial Blue (from building exterior) */
+    --background: 205 35% 12%;
+    --foreground: 210 20% 98%;
     
-    /* Cards - Elevated Surfaces */
-    --card: 222 40% 8%;
-    --card-foreground: 45 30% 96%;
+    /* Cards - Elevated Blue Surfaces */
+    --card: 205 30% 15%;
+    --card-foreground: 210 20% 98%;
     
     /* Popovers */
-    --popover: 222 45% 7%;
-    --popover-foreground: 45 30% 96%;
+    --popover: 205 35% 10%;
+    --popover-foreground: 210 20% 98%;
     
-    /* Primary - Deep Sacred Blue */
-    --primary: 222 47% 11%;
-    --primary-foreground: 45 30% 96%;
+    /* Primary - Celestial Blue (signature church blue) */
+    --primary: 205 45% 45%;
+    --primary-foreground: 210 20% 98%;
     
-    /* Secondary - Royal Gold */
-    --secondary: 43 74% 49%;
-    --secondary-foreground: 222 47% 6%;
+    /* Secondary - Pure Celestial White */
+    --secondary: 210 20% 98%;
+    --secondary-foreground: 205 35% 12%;
     
-    /* Muted - Soft Depth */
-    --muted: 222 30% 12%;
-    --muted-foreground: 220 20% 65%;
+    /* Muted - Soft Blue Depth */
+    --muted: 205 25% 18%;
+    --muted-foreground: 210 15% 70%;
     
-    /* Accent - Celestial Gold */
-    --accent: 38 92% 50%;
-    --accent-foreground: 222 47% 6%;
+    /* Accent - Spiritual Gold (for sacred highlights) */
+    --accent: 43 85% 55%;
+    --accent-foreground: 205 35% 12%;
     
     /* Destructive */
     --destructive: 0 84% 60%;
-    --destructive-foreground: 45 30% 96%;
+    --destructive-foreground: 210 20% 98%;
     
     /* Borders & Inputs */
-    --border: 222 30% 18%;
-    --input: 222 30% 15%;
-    --ring: 43 74% 49%;
+    --border: 205 25% 25%;
+    --input: 205 25% 20%;
+    --ring: 205 45% 45%;
     
     --radius: 1rem;
     
     /* ─────────────────────────────────────────────────────────────────────────
-       EXTENDED PALETTE - Premium Accents
+       EXTENDED PALETTE - Celestial Church Colors
        ───────────────────────────────────────────────────────────────────────── */
-    --celestial-blue: 215 80% 55%;
-    --celestial-purple: 280 70% 50%;
-    --celestial-teal: 180 70% 45%;
-    --warm-gold: 38 92% 50%;
-    --soft-ivory: 45 30% 96%;
-    --deep-navy: 222 47% 6%;
+    --celestial-blue: 205 45% 45%;
+    --celestial-blue-light: 205 50% 60%;
+    --celestial-blue-dark: 205 40% 30%;
+    --celestial-white: 210 20% 98%;
+    --celestial-ivory: 45 30% 96%;
+    --celestial-gold: 43 85% 55%;
+    --burgundy-accent: 350 45% 35%;
+    --deep-blue: 205 35% 12%;
     
     /* ─────────────────────────────────────────────────────────────────────────
-       PREMIUM GRADIENTS
+       PREMIUM GRADIENTS - Celestial Theme
        ───────────────────────────────────────────────────────────────────────── */
     --gradient-hero: linear-gradient(135deg, 
-      hsl(222 47% 4%) 0%, 
-      hsl(222 50% 8%) 50%, 
-      hsl(280 40% 10%) 100%);
+      hsl(205 40% 8%) 0%, 
+      hsl(205 35% 15%) 50%, 
+      hsl(205 30% 20%) 100%);
     
     --gradient-radial-glow: radial-gradient(
       ellipse 80% 50% at 50% -20%, 
-      hsl(43 74% 49% / 0.15) 0%, 
+      hsl(205 50% 60% / 0.2) 0%, 
       transparent 50%);
     
-    --gradient-gold: linear-gradient(135deg, 
-      hsl(43 74% 49%) 0%, 
-      hsl(38 92% 55%) 50%, 
-      hsl(43 74% 49%) 100%);
+    --gradient-celestial: linear-gradient(135deg, 
+      hsl(205 45% 45%) 0%, 
+      hsl(205 50% 55%) 50%, 
+      hsl(205 45% 45%) 100%);
     
-    --gradient-gold-shine: linear-gradient(90deg,
+    --gradient-white-glow: linear-gradient(135deg,
+      hsl(210 20% 98%) 0%,
+      hsl(210 25% 95%) 50%,
+      hsl(210 20% 98%) 100%);
+    
+    --gradient-shine: linear-gradient(90deg,
       transparent 0%,
-      hsl(43 74% 70% / 0.4) 50%,
+      hsl(210 20% 98% / 0.4) 50%,
       transparent 100%);
     
     --gradient-glass: linear-gradient(135deg, 
-      hsl(222 30% 15% / 0.8) 0%, 
-      hsl(222 30% 10% / 0.6) 100%);
+      hsl(205 30% 18% / 0.8) 0%, 
+      hsl(205 30% 12% / 0.6) 100%);
     
     --gradient-card: linear-gradient(145deg, 
-      hsl(222 40% 10%) 0%, 
-      hsl(222 45% 7%) 100%);
+      hsl(205 30% 18%) 0%, 
+      hsl(205 35% 12%) 100%);
     
-    --gradient-text-gold: linear-gradient(135deg, 
-      hsl(43 74% 60%) 0%, 
-      hsl(38 92% 50%) 50%, 
-      hsl(43 74% 45%) 100%);
+    --gradient-text-white: linear-gradient(135deg, 
+      hsl(210 20% 100%) 0%, 
+      hsl(210 15% 90%) 50%, 
+      hsl(210 20% 100%) 100%);
+    
+    --gradient-gold: linear-gradient(135deg, 
+      hsl(43 85% 55%) 0%, 
+      hsl(43 90% 65%) 50%, 
+      hsl(43 85% 55%) 100%);
     
     --gradient-aurora: linear-gradient(135deg,
-      hsl(280 70% 50% / 0.3) 0%,
-      hsl(215 80% 55% / 0.2) 50%,
-      hsl(180 70% 45% / 0.3) 100%);
+      hsl(205 50% 50% / 0.3) 0%,
+      hsl(205 60% 60% / 0.2) 50%,
+      hsl(210 20% 98% / 0.1) 100%);
     
     /* ─────────────────────────────────────────────────────────────────────────
-       PREMIUM SHADOWS
+       PREMIUM SHADOWS - Blue & White Theme
        ───────────────────────────────────────────────────────────────────────── */
-    --shadow-glow-gold: 0 0 60px hsl(43 74% 49% / 0.3);
-    --shadow-glow-soft: 0 0 100px hsl(43 74% 49% / 0.15);
-    --shadow-elegant: 0 25px 80px -20px hsl(222 47% 3% / 0.8);
-    --shadow-lift: 0 10px 40px -10px hsl(222 47% 3% / 0.6);
-    --shadow-glass: 0 8px 32px 0 hsl(222 47% 3% / 0.4);
-    --shadow-inset: inset 0 2px 20px hsl(222 47% 3% / 0.5);
-    --shadow-border-glow: 0 0 0 1px hsl(43 74% 49% / 0.2);
+    --shadow-glow-blue: 0 0 60px hsl(205 50% 55% / 0.3);
+    --shadow-glow-white: 0 0 80px hsl(210 20% 98% / 0.15);
+    --shadow-glow-soft: 0 0 100px hsl(205 45% 45% / 0.2);
+    --shadow-elegant: 0 25px 80px -20px hsl(205 40% 5% / 0.8);
+    --shadow-lift: 0 10px 40px -10px hsl(205 40% 5% / 0.6);
+    --shadow-glass: 0 8px 32px 0 hsl(205 40% 5% / 0.4);
+    --shadow-inset: inset 0 2px 20px hsl(205 40% 5% / 0.5);
+    --shadow-border-glow: 0 0 0 1px hsl(205 50% 55% / 0.3);
     
     /* ─────────────────────────────────────────────────────────────────────────
        TRANSITIONS
@@ -124,14 +138,14 @@
     /* ─────────────────────────────────────────────────────────────────────────
        SIDEBAR (keeping for compatibility)
        ───────────────────────────────────────────────────────────────────────── */
-    --sidebar-background: 222 47% 6%;
-    --sidebar-foreground: 45 30% 96%;
-    --sidebar-primary: 43 74% 49%;
-    --sidebar-primary-foreground: 222 47% 6%;
-    --sidebar-accent: 222 30% 12%;
-    --sidebar-accent-foreground: 45 30% 96%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 43 74% 49%;
+    --sidebar-background: 205 35% 12%;
+    --sidebar-foreground: 210 20% 98%;
+    --sidebar-primary: 205 45% 45%;
+    --sidebar-primary-foreground: 210 20% 98%;
+    --sidebar-accent: 205 25% 18%;
+    --sidebar-accent-foreground: 210 20% 98%;
+    --sidebar-border: 205 25% 25%;
+    --sidebar-ring: 205 45% 45%;
   }
 }
 
@@ -155,35 +169,35 @@
     @apply font-heading tracking-wide;
   }
   
-  /* Premium Selection */
+  /* Premium Selection - Blue Theme */
   ::selection {
-    background: hsl(43 74% 49% / 0.3);
-    color: hsl(45 30% 96%);
+    background: hsl(205 50% 55% / 0.3);
+    color: hsl(210 20% 98%);
   }
   
-  /* Custom Scrollbar */
+  /* Custom Scrollbar - Celestial Blue */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   
   ::-webkit-scrollbar-track {
-    background: hsl(222 47% 6%);
+    background: hsl(205 35% 12%);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, hsl(43 74% 49%), hsl(38 92% 50%));
+    background: linear-gradient(180deg, hsl(205 45% 45%), hsl(205 50% 55%));
     border-radius: 10px;
-    border: 2px solid hsl(222 47% 6%);
+    border: 2px solid hsl(205 35% 12%);
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, hsl(43 74% 55%), hsl(38 92% 55%));
+    background: linear-gradient(180deg, hsl(205 50% 50%), hsl(205 55% 60%));
   }
   
   /* Focus States */
   *:focus-visible {
-    outline: 2px solid hsl(43 74% 49%);
+    outline: 2px solid hsl(205 45% 45%);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -199,7 +213,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   COMPONENT UTILITIES
+   COMPONENT UTILITIES - Celestial Church Theme
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @layer components {
@@ -229,10 +243,22 @@
     background: var(--gradient-radial-glow);
   }
   
-  /* Gold Text Gradient */
+  /* White Text Gradient - For Celestial Theme */
+  .text-gradient-white {
+    @apply bg-clip-text text-transparent font-heading;
+    background-image: var(--gradient-text-white);
+  }
+  
+  /* Gold Text Gradient - For Sacred Highlights */
   .text-gradient-gold {
     @apply bg-clip-text text-transparent font-heading;
-    background-image: var(--gradient-text-gold);
+    background-image: var(--gradient-gold);
+  }
+  
+  /* Blue Text Gradient */
+  .text-gradient-blue {
+    @apply bg-clip-text text-transparent font-heading;
+    background-image: var(--gradient-celestial);
   }
   
   /* Glowing Border */
@@ -244,50 +270,64 @@
   .glow-border::after {
     content: '';
     @apply absolute inset-0 rounded-inherit opacity-0 transition-opacity duration-500 pointer-events-none;
-    box-shadow: var(--shadow-glow-gold);
+    box-shadow: var(--shadow-glow-blue);
   }
   
   .glow-border:hover::after {
     @apply opacity-100;
   }
   
-  /* Premium Button */
+  /* Premium Button - White on Blue */
   .btn-premium {
     @apply relative overflow-hidden px-8 py-4 rounded-xl font-heading font-semibold tracking-wider uppercase text-sm;
-    background: var(--gradient-gold);
-    color: hsl(222 47% 6%);
-    box-shadow: var(--shadow-lift), var(--shadow-glow-gold);
+    background: var(--gradient-white-glow);
+    color: hsl(205 35% 12%);
+    box-shadow: var(--shadow-lift), var(--shadow-glow-white);
     transition: var(--transition-smooth);
   }
   
   .btn-premium::before {
     content: '';
     @apply absolute inset-0 opacity-0 transition-opacity duration-500;
-    background: var(--gradient-gold-shine);
+    background: var(--gradient-shine);
     animation: shine 3s infinite;
   }
   
   .btn-premium:hover {
     transform: translateY(-2px) scale(1.02);
-    box-shadow: var(--shadow-elegant), var(--shadow-glow-gold);
+    box-shadow: var(--shadow-elegant), var(--shadow-glow-white);
   }
   
   .btn-premium:hover::before {
     @apply opacity-100;
   }
   
+  /* Celestial Blue Button */
+  .btn-celestial {
+    @apply relative overflow-hidden px-8 py-4 rounded-xl font-heading font-semibold tracking-wider uppercase text-sm;
+    background: var(--gradient-celestial);
+    color: hsl(210 20% 98%);
+    box-shadow: var(--shadow-lift), var(--shadow-glow-blue);
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-celestial:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-elegant), var(--shadow-glow-blue);
+  }
+  
   /* Outline Premium Button */
   .btn-outline-premium {
     @apply relative overflow-hidden px-8 py-4 rounded-xl font-heading font-semibold tracking-wider uppercase text-sm;
     background: transparent;
-    border: 2px solid hsl(43 74% 49%);
-    color: hsl(43 74% 49%);
+    border: 2px solid hsl(210 20% 98%);
+    color: hsl(210 20% 98%);
     transition: var(--transition-smooth);
   }
   
   .btn-outline-premium:hover {
-    background: hsl(43 74% 49% / 0.1);
-    box-shadow: var(--shadow-glow-gold);
+    background: hsl(210 20% 98% / 0.1);
+    box-shadow: var(--shadow-glow-white);
     transform: translateY(-2px);
   }
   
@@ -300,20 +340,27 @@
     @apply text-lg md:text-xl text-muted-foreground font-light tracking-wide max-w-2xl;
   }
   
-  /* Decorative Line */
+  /* Decorative Line - Celestial White */
+  .celestial-line {
+    @apply h-px w-24 mx-auto;
+    background: var(--gradient-white-glow);
+    box-shadow: var(--shadow-glow-white);
+  }
+  
+  .celestial-line-vertical {
+    @apply w-px h-24;
+    background: var(--gradient-white-glow);
+    box-shadow: var(--shadow-glow-white);
+  }
+  
+  /* Gold Line for Sacred Elements */
   .gold-line {
     @apply h-px w-24 mx-auto;
     background: var(--gradient-gold);
-    box-shadow: var(--shadow-glow-gold);
+    box-shadow: 0 0 30px hsl(43 85% 55% / 0.3);
   }
   
-  .gold-line-vertical {
-    @apply w-px h-24;
-    background: var(--gradient-gold);
-    box-shadow: var(--shadow-glow-gold);
-  }
-  
-  /* Aurora Background Effect */
+  /* Aurora Background Effect - Blue Theme */
   .aurora-bg {
     @apply absolute inset-0 pointer-events-none opacity-30;
     background: var(--gradient-aurora);
@@ -335,7 +382,7 @@
   .premium-image::after {
     content: '';
     @apply absolute inset-0;
-    background: linear-gradient(180deg, transparent 60%, hsl(222 47% 6% / 0.8) 100%);
+    background: linear-gradient(180deg, transparent 60%, hsl(205 35% 12% / 0.8) 100%);
   }
   
   /* Stat Card */
@@ -344,7 +391,7 @@
   }
   
   .stat-card .stat-value {
-    @apply text-5xl md:text-6xl font-heading font-bold text-gradient-gold mb-2;
+    @apply text-5xl md:text-6xl font-heading font-bold text-gradient-white mb-2;
   }
   
   .stat-card .stat-label {
@@ -363,17 +410,22 @@
   
   .feature-card .icon-wrapper {
     @apply w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500;
-    background: hsl(43 74% 49% / 0.1);
-    border: 1px solid hsl(43 74% 49% / 0.3);
+    background: hsl(205 50% 55% / 0.1);
+    border: 1px solid hsl(205 50% 55% / 0.3);
   }
   
   .feature-card:hover .icon-wrapper {
-    background: var(--gradient-gold);
-    box-shadow: var(--shadow-glow-gold);
+    background: var(--gradient-celestial);
+    box-shadow: var(--shadow-glow-blue);
   }
   
   .feature-card:hover .icon-wrapper svg {
-    color: hsl(222 47% 6%);
+    color: hsl(210 20% 98%);
+  }
+  
+  /* Cross Pattern Background */
+  .cross-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a90d9' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
 }
 
@@ -409,10 +461,10 @@
   
   @keyframes pulse-glow {
     0%, 100% { 
-      box-shadow: 0 0 20px hsl(43 74% 49% / 0.3);
+      box-shadow: 0 0 20px hsl(205 50% 55% / 0.3);
     }
     50% { 
-      box-shadow: 0 0 40px hsl(43 74% 49% / 0.5);
+      box-shadow: 0 0 40px hsl(205 50% 55% / 0.5);
     }
   }
   
@@ -443,12 +495,25 @@
     }
   }
   
+  @keyframes divine-glow {
+    0%, 100% { 
+      box-shadow: 0 0 30px hsl(210 20% 98% / 0.2);
+    }
+    50% { 
+      box-shadow: 0 0 60px hsl(210 20% 98% / 0.4);
+    }
+  }
+  
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
   
   .animate-pulse-glow {
     animation: pulse-glow 3s ease-in-out infinite;
+  }
+  
+  .animate-divine-glow {
+    animation: divine-glow 3s ease-in-out infinite;
   }
   
   .animate-gradient {
@@ -486,7 +551,7 @@
   }
   
   .hover-glow:hover {
-    box-shadow: var(--shadow-glow-gold);
+    box-shadow: var(--shadow-glow-blue);
   }
   
   .hover-scale {

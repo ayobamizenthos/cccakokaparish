@@ -9,7 +9,6 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   // Countdown to Dec 7th
@@ -56,34 +55,34 @@ const Hero = () => {
       ref={heroRef} 
       className="relative w-full min-h-screen overflow-hidden"
     >
-      {/* Background Layers */}
+      {/* Background Layers - Celestial Blue Theme */}
       <div className="hero-bg absolute inset-0">
-        {/* Base Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(222,50%,8%)] to-[hsl(280,30%,8%)]" />
+        {/* Base Gradient - Deep Celestial Blue */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(205,40%,10%)] to-[hsl(205,35%,15%)]" />
         
-        {/* Animated Aurora */}
+        {/* Animated Aurora - Blue & White Theme */}
         <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[hsl(280,70%,50%)] rounded-full filter blur-[150px] animate-float opacity-30" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[hsl(215,80%,55%)] rounded-full filter blur-[150px] animate-float-subtle opacity-20" style={{ animationDelay: '-2s' }} />
-          <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-[hsl(43,74%,49%)] rounded-full filter blur-[150px] animate-float opacity-15" style={{ animationDelay: '-4s' }} />
+          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-celestial-blue-light rounded-full filter blur-[150px] animate-float opacity-30" />
+          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-celestial-white rounded-full filter blur-[150px] animate-float-subtle opacity-15" style={{ animationDelay: '-2s' }} />
+          <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-celestial-blue rounded-full filter blur-[150px] animate-float opacity-20" style={{ animationDelay: '-4s' }} />
         </div>
 
-        {/* Subtle Pattern */}
-        <div className="absolute inset-0 opacity-5 bg-hero-pattern" />
+        {/* Cross Pattern */}
+        <div className="absolute inset-0 opacity-5 cross-pattern" />
         
         {/* Radial Vignette */}
         <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/80" />
         
-        {/* Top Gold Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[hsl(43,74%,49%)] rounded-full filter blur-[200px] opacity-10" />
+        {/* Top Divine White Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-celestial-white rounded-full filter blur-[200px] opacity-10" />
       </div>
 
-      {/* Floating Particles */}
+      {/* Floating Particles - White */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-secondary/30 rounded-full"
+            className="absolute w-1 h-1 bg-secondary/40 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -109,7 +108,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="mb-8"
           >
             <span className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-secondary/30 bg-secondary/5 backdrop-blur-sm">
@@ -125,25 +124,25 @@ const Hero = () => {
             className="font-heading font-bold leading-none mb-6"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 1, ease: "easeOut" }}
+            transition={{ delay: 0.7, duration: 1, ease: "easeOut" }}
           >
-            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-foreground tracking-wide">
-              DIVINITY
+            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gradient-white tracking-wide">
+              GLADE
             </span>
-            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gradient-gold tracking-wide mt-2">
-              UNVEILED
+            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gradient-blue tracking-wide mt-2">
+              CATHEDRAL
             </span>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-foreground/60 font-body font-light tracking-wide max-w-2xl mx-auto mb-12"
+            className="text-lg md:text-xl text-foreground/70 font-body font-light tracking-wide max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.8, duration: 1 }}
+            transition={{ delay: 1, duration: 1 }}
           >
-            Experience the divine presence at Glade Cathedral — where heaven meets earth 
-            in sacred worship and celestial celebration.
+            Experience the divine presence at Celestial Church of Christ, Akoka Parish — 
+            where heaven meets earth in sacred worship and celestial celebration.
           </motion.p>
 
           {/* Countdown */}
@@ -151,7 +150,7 @@ const Hero = () => {
             className="mb-12"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2, duration: 0.8 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
           >
             <p className="text-xs font-heading tracking-[0.3em] uppercase text-secondary mb-6">
               Annual Harvest Thanksgiving
@@ -164,7 +163,7 @@ const Hero = () => {
                 { val: timeLeft.seconds, label: "Secs" }
               ].map((item, i) => (
                 <div key={i} className="flex flex-col items-center px-3 md:px-6">
-                  <span className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient-gold tabular-nums">
+                  <span className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient-white tabular-nums">
                     {String(item.val).padStart(2, '0')}
                   </span>
                   <span className="text-[10px] md:text-xs uppercase tracking-widest text-foreground/50 mt-2">
@@ -183,7 +182,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.8 }}
+            transition={{ delay: 1.4, duration: 0.8 }}
           >
             <motion.button
               className="btn-premium flex items-center justify-center gap-3"
@@ -209,7 +208,7 @@ const Hero = () => {
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2.5, duration: 1 }}
+          transition={{ delay: 1.6, duration: 1 }}
         >
           <motion.div
             className="flex flex-col items-center gap-2 text-foreground/30 cursor-pointer hover:text-secondary transition-colors"
