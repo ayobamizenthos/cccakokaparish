@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: false, // Disabled - single premium theme only
+  darkMode: false, // Disabled - single Celestial Church theme only
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
@@ -60,16 +60,19 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Extended Premium Colors
-        gold: {
-          DEFAULT: "hsl(43 74% 49%)",
-          light: "hsl(43 74% 60%)",
-          dark: "hsl(43 74% 40%)",
-        },
+        // Celestial Church of Christ Colors
         celestial: {
-          blue: "hsl(215 80% 55%)",
-          purple: "hsl(280 70% 50%)",
-          teal: "hsl(180 70% 45%)",
+          blue: "hsl(205 45% 45%)",
+          "blue-light": "hsl(205 50% 60%)",
+          "blue-dark": "hsl(205 40% 30%)",
+          white: "hsl(210 20% 98%)",
+          ivory: "hsl(45 30% 96%)",
+          gold: "hsl(43 85% 55%)",
+        },
+        burgundy: {
+          DEFAULT: "hsl(350 45% 35%)",
+          light: "hsl(350 40% 45%)",
+          dark: "hsl(350 50% 25%)",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -102,15 +105,17 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'hero-pattern': 'url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23d4af37" fill-opacity="0.03"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+        'cross-pattern': 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%234a90d9\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
       },
       boxShadow: {
-        "glow": "0 0 60px hsl(43 74% 49% / 0.3)",
-        "glow-soft": "0 0 100px hsl(43 74% 49% / 0.15)",
-        "elegant": "0 25px 80px -20px hsl(222 47% 3% / 0.8)",
-        "lift": "0 10px 40px -10px hsl(222 47% 3% / 0.6)",
-        "glass": "0 8px 32px 0 hsl(222 47% 3% / 0.4)",
-        "inner-glow": "inset 0 0 30px hsl(43 74% 49% / 0.1)",
+        "glow-blue": "0 0 60px hsl(205 50% 55% / 0.3)",
+        "glow-white": "0 0 80px hsl(210 20% 98% / 0.15)",
+        "glow-soft": "0 0 100px hsl(205 45% 45% / 0.2)",
+        "elegant": "0 25px 80px -20px hsl(205 40% 5% / 0.8)",
+        "lift": "0 10px 40px -10px hsl(205 40% 5% / 0.6)",
+        "glass": "0 8px 32px 0 hsl(205 40% 5% / 0.4)",
+        "inner-glow": "inset 0 0 30px hsl(205 50% 55% / 0.1)",
+        "divine": "0 0 60px hsl(210 20% 98% / 0.2)",
       },
       backdropBlur: {
         'xs': '2px',
@@ -151,8 +156,12 @@ export default {
           "100%": { opacity: "1", transform: "scale(1)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 30px hsl(43 74% 49% / 0.3)" },
-          "50%": { boxShadow: "0 0 60px hsl(43 74% 49% / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 30px hsl(205 50% 55% / 0.3)" },
+          "50%": { boxShadow: "0 0 60px hsl(205 50% 55% / 0.5)" },
+        },
+        "divine-pulse": {
+          "0%, 100%": { boxShadow: "0 0 30px hsl(210 20% 98% / 0.2)" },
+          "50%": { boxShadow: "0 0 60px hsl(210 20% 98% / 0.4)" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
@@ -183,8 +192,8 @@ export default {
           },
         },
         "border-glow": {
-          "0%, 100%": { borderColor: "hsl(43 74% 49% / 0.3)" },
-          "50%": { borderColor: "hsl(43 74% 49% / 0.8)" },
+          "0%, 100%": { borderColor: "hsl(205 50% 55% / 0.3)" },
+          "50%": { borderColor: "hsl(205 50% 55% / 0.8)" },
         },
       },
       animation: {
@@ -197,6 +206,7 @@ export default {
         "slide-in-left": "slide-in-left 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "scale-in": "scale-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "glow-pulse": "glow-pulse 3s ease-in-out infinite",
+        "divine-pulse": "divine-pulse 3s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
         "float": "float 6s ease-in-out infinite",
         "float-subtle": "float-subtle 4s ease-in-out infinite",
