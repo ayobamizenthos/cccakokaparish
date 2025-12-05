@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
+import CathedralShowcase from "@/components/CathedralShowcase";
 import Welcome from "@/components/Welcome";
 import ServiceTimes from "@/components/ServiceTimes";
 import Shepherd from "@/components/Shepherd";
@@ -18,14 +19,15 @@ const Index = () => {
   return (
     <>
       <SEO 
-        title="Glade Cathedral | Apex Design" 
-        description="The Glory of the Latter House" 
+        title="Glade Cathedral | Celestial Church of Christ Akoka Parish" 
+        description="Experience the divine presence at Celestial Church of Christ, Akoka Parish — where heaven meets earth in sacred worship and celestial celebration." 
         url="/" 
       />
       <ProgressIndicator />
       <Navigation />
-      <main id="main-content" className="bg-slate-900 min-h-screen">
+      <main id="main-content" className="bg-background min-h-screen">
         <Hero />
+        <CathedralShowcase />
         <Welcome />
         <ServiceTimes />
         <Shepherd />
