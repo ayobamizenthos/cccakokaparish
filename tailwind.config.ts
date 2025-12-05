@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export default {
-  darkMode: false, // Disabled - single Celestial Church theme only
+  darkMode: false,
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
@@ -16,6 +16,7 @@ export default {
       fontFamily: {
         heading: ['Cinzel', 'serif'],
         body: ['Montserrat', 'sans-serif'],
+        cormorant: ['Cormorant Garamond', 'serif'],
       },
       letterSpacing: {
         'luxury': '0.15em',
@@ -30,10 +31,19 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          warm: "hsl(var(--background-warm))",
+          cream: "hsl(var(--background-cream))",
+        },
+        foreground: {
+          DEFAULT: "hsl(var(--foreground))",
+          muted: "hsl(var(--foreground-muted))",
+        },
         primary: {
           DEFAULT: "hsl(var(--primary))",
+          light: "hsl(var(--primary-light))",
+          dark: "hsl(var(--primary-dark))",
           foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
@@ -50,6 +60,8 @@ export default {
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",
+          light: "hsl(var(--accent-light))",
+          dark: "hsl(var(--accent-dark))",
           foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
@@ -60,19 +72,18 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Celestial Church of Christ Colors
-        celestial: {
-          blue: "hsl(205 45% 45%)",
-          "blue-light": "hsl(205 50% 60%)",
-          "blue-dark": "hsl(205 40% 30%)",
-          white: "hsl(210 20% 98%)",
-          ivory: "hsl(45 30% 96%)",
-          gold: "hsl(43 85% 55%)",
+        // Gold Spectrum
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          light: "hsl(var(--gold-light))",
+          dark: "hsl(var(--gold-dark))",
+          muted: "hsl(var(--gold-muted))",
         },
-        burgundy: {
-          DEFAULT: "hsl(350 45% 35%)",
-          light: "hsl(350 40% 45%)",
-          dark: "hsl(350 50% 25%)",
+        // Celestial Blue
+        celestial: {
+          DEFAULT: "hsl(var(--celestial-blue))",
+          light: "hsl(var(--celestial-blue-light))",
+          dark: "hsl(var(--celestial-blue-dark))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
@@ -105,17 +116,20 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'cross-pattern': 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%234a90d9\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
       },
       boxShadow: {
-        "glow-blue": "0 0 60px hsl(205 50% 55% / 0.3)",
-        "glow-white": "0 0 80px hsl(210 20% 98% / 0.15)",
-        "glow-soft": "0 0 100px hsl(205 45% 45% / 0.2)",
-        "elegant": "0 25px 80px -20px hsl(205 40% 5% / 0.8)",
-        "lift": "0 10px 40px -10px hsl(205 40% 5% / 0.6)",
-        "glass": "0 8px 32px 0 hsl(205 40% 5% / 0.4)",
-        "inner-glow": "inset 0 0 30px hsl(205 50% 55% / 0.1)",
-        "divine": "0 0 60px hsl(210 20% 98% / 0.2)",
+        'xs': 'var(--shadow-xs)',
+        'sm': 'var(--shadow-sm)',
+        'md': 'var(--shadow-md)',
+        'lg': 'var(--shadow-lg)',
+        'xl': 'var(--shadow-xl)',
+        'gold-sm': 'var(--shadow-gold-sm)',
+        'gold-md': 'var(--shadow-gold-md)',
+        'gold-lg': 'var(--shadow-gold-lg)',
+        'blue-sm': 'var(--shadow-blue-sm)',
+        'blue-md': 'var(--shadow-blue-md)',
+        'card': 'var(--shadow-card)',
+        'card-hover': 'var(--shadow-card-hover)',
       },
       backdropBlur: {
         'xs': '2px',
@@ -156,12 +170,12 @@ export default {
           "100%": { opacity: "1", transform: "scale(1)" },
         },
         "glow-pulse": {
-          "0%, 100%": { boxShadow: "0 0 30px hsl(205 50% 55% / 0.3)" },
-          "50%": { boxShadow: "0 0 60px hsl(205 50% 55% / 0.5)" },
+          "0%, 100%": { boxShadow: "0 0 30px hsl(43 90% 52% / 0.2)" },
+          "50%": { boxShadow: "0 0 60px hsl(43 90% 52% / 0.4)" },
         },
         "divine-pulse": {
-          "0%, 100%": { boxShadow: "0 0 30px hsl(210 20% 98% / 0.2)" },
-          "50%": { boxShadow: "0 0 60px hsl(210 20% 98% / 0.4)" },
+          "0%, 100%": { boxShadow: "0 0 30px hsl(210 70% 48% / 0.15)" },
+          "50%": { boxShadow: "0 0 60px hsl(210 70% 48% / 0.3)" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
@@ -179,21 +193,17 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
-        "text-reveal": {
-          "0%": { 
-            opacity: "0",
-            transform: "translateY(100%)",
-            clipPath: "inset(100% 0 0 0)"
-          },
-          "100%": { 
-            opacity: "1",
-            transform: "translateY(0)",
-            clipPath: "inset(0 0 0 0)"
-          },
+        "pulse-gold": {
+          "0%, 100%": { boxShadow: "0 0 20px hsl(43 90% 52% / 0.3)" },
+          "50%": { boxShadow: "0 0 50px hsl(43 90% 52% / 0.5)" },
         },
-        "border-glow": {
-          "0%, 100%": { borderColor: "hsl(205 50% 55% / 0.3)" },
-          "50%": { borderColor: "hsl(205 50% 55% / 0.8)" },
+        "divine-rays": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        "cross-glow": {
+          "0%, 100%": { filter: "drop-shadow(0 0 15px hsl(43 90% 52% / 0.4))" },
+          "50%": { filter: "drop-shadow(0 0 35px hsl(43 90% 52% / 0.7))" },
         },
       },
       animation: {
@@ -211,8 +221,9 @@ export default {
         "float": "float 6s ease-in-out infinite",
         "float-subtle": "float-subtle 4s ease-in-out infinite",
         "rotate-slow": "rotate-slow 20s linear infinite",
-        "text-reveal": "text-reveal 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
-        "border-glow": "border-glow 2s ease-in-out infinite",
+        "pulse-gold": "pulse-gold 3s ease-in-out infinite",
+        "divine-rays": "divine-rays 60s linear infinite",
+        "cross-glow": "cross-glow 3s ease-in-out infinite",
       },
       transitionTimingFunction: {
         'luxury': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
