@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import CathedralShowcase from "@/components/CathedralShowcase";
+import ImageGallery from "@/components/ImageGallery";
 import Welcome from "@/components/Welcome";
 import ServiceTimes from "@/components/ServiceTimes";
 import Shepherd from "@/components/Shepherd";
@@ -28,6 +29,7 @@ const Index = () => {
       <main id="main-content" className="bg-background min-h-screen">
         <Hero />
         <CathedralShowcase />
+        <ImageGallery />
         <Welcome />
         <ServiceTimes />
         <Shepherd />
