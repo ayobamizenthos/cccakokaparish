@@ -1,13 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Play, ArrowDown } from "lucide-react";
+import { Play, ChevronDown } from "lucide-react";
 import churchExterior from "@/assets/church-exterior-glade.jpg";
 
 const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
-  // Countdown to Dec 7th
   useEffect(() => {
     const currentYear = new Date().getFullYear();
     let targetDate = new Date(`December 7, ${currentYear} 10:00:00`).getTime();
@@ -32,102 +30,89 @@ const Hero = () => {
   };
 
   return (
-    <section ref={heroRef} className="relative w-full min-h-screen overflow-hidden">
-      {/* Background Image */}
+    <section className="relative w-full min-h-[100svh] overflow-hidden flex items-center">
+      {/* Background */}
       <div className="absolute inset-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${churchExterior})` }}
+        <img 
+          src={churchExterior} 
+          alt="" 
+          className="w-full h-full object-cover"
         />
-        {/* Sophisticated Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-center px-6 py-32">
-        <div className="max-w-4xl mx-auto">
+      <div className="relative z-10 w-full px-5 md:px-8 py-24 md:py-32">
+        <div className="max-w-4xl mx-auto text-center">
           {/* Pre-title */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-white/70 text-xs tracking-[0.3em] uppercase mb-8 font-light"
-            style={{ fontFamily: 'Inter, sans-serif' }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-white/60 text-[11px] md:text-xs tracking-[0.25em] uppercase mb-6 md:mb-8"
           >
             Celestial Church of Christ • Akoka Parish
           </motion.p>
 
-          {/* Main Title */}
-          <motion.h1 
-            className="mb-6"
-            initial={{ opacity: 0, y: 30 }}
+          {/* Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-white mb-4"
           >
-            <span 
-              className="block text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-medium tracking-tight text-white"
-              style={{ fontFamily: 'Cinzel, serif' }}
-            >
+            <span className="block text-[clamp(3rem,12vw,7rem)] leading-[0.9] font-semibold tracking-[-0.02em]">
               GLADE
             </span>
-            <span 
-              className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal tracking-[0.1em] text-white/90 mt-2"
-              style={{ fontFamily: 'Cinzel, serif' }}
-            >
+            <span className="block text-[clamp(2rem,8vw,4.5rem)] leading-[0.9] font-normal tracking-[0.05em] text-white/90">
               CATHEDRAL
             </span>
           </motion.h1>
 
-          {/* Gold Line */}
+          {/* Divider */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="w-24 h-px bg-[hsl(38,75%,50%)] mx-auto my-10"
+            transition={{ delay: 0.7, duration: 0.6 }}
+            className="w-16 h-[1px] bg-[hsl(38,70%,50%)] mx-auto my-6 md:my-8"
           />
 
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-white/80 font-light max-w-2xl mx-auto mb-16"
-            style={{ fontFamily: 'Cormorant Garamond, serif' }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="text-white/70 text-base md:text-lg lg:text-xl max-w-xl mx-auto mb-10 md:mb-14 px-4"
+            style={{ fontFamily: 'Playfair Display, serif', fontStyle: 'italic' }}
           >
-            The Last Ark of Salvation — where heaven meets earth in sacred worship and celestial celebration.
+            The Last Ark of Salvation
           </motion.p>
 
           {/* Countdown */}
           <motion.div
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+            className="mb-10 md:mb-14"
           >
-            <p 
-              className="text-[hsl(38,75%,60%)] text-xs tracking-[0.25em] uppercase mb-8"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
+            <p className="text-[hsl(38,70%,60%)] text-[10px] md:text-xs tracking-[0.2em] uppercase mb-5 md:mb-6">
               Annual Harvest Thanksgiving
             </p>
-            <div className="flex items-center justify-center gap-4 sm:gap-6">
+            <div className="flex items-center justify-center gap-3 md:gap-5">
               {[
                 { val: timeLeft.days, label: "Days" },
-                { val: timeLeft.hours, label: "Hours" },
-                { val: timeLeft.minutes, label: "Mins" },
-                { val: timeLeft.seconds, label: "Secs" }
+                { val: timeLeft.hours, label: "Hrs" },
+                { val: timeLeft.minutes, label: "Min" },
+                { val: timeLeft.seconds, label: "Sec" }
               ].map((item, i) => (
                 <div key={i} className="text-center">
                   <div 
-                    className="text-3xl sm:text-4xl md:text-5xl font-normal text-white tabular-nums mb-2"
-                    style={{ fontFamily: 'Cinzel, serif' }}
+                    className="text-[clamp(1.75rem,6vw,3rem)] font-medium text-white tabular-nums leading-none"
+                    style={{ fontFamily: 'Playfair Display, serif' }}
                   >
                     {String(item.val).padStart(2, '0')}
                   </div>
-                  <span 
-                    className="text-[10px] uppercase tracking-[0.2em] text-white/50"
-                    style={{ fontFamily: 'Inter, sans-serif' }}
-                  >
+                  <span className="text-[9px] md:text-[10px] tracking-[0.15em] uppercase text-white/40 mt-1 block">
                     {item.label}
                   </span>
                 </div>
@@ -135,19 +120,19 @@ const Hero = () => {
             </div>
           </motion.div>
 
-          {/* CTA Buttons */}
+          {/* CTAs */}
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
+            transition={{ delay: 1.3, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4"
           >
-            <button className="btn-gold flex items-center justify-center gap-3">
+            <button className="btn-gold flex items-center justify-center gap-2">
               <Play size={14} />
               <span>Watch Live</span>
             </button>
-            <button className="btn-outline border-white/30 text-white hover:bg-white hover:text-black flex items-center justify-center gap-3">
-              <span>View Schedule</span>
+            <button className="btn-outline-light">
+              View Schedule
             </button>
           </motion.div>
         </div>
@@ -155,23 +140,17 @@ const Hero = () => {
         {/* Scroll Indicator */}
         <motion.button
           onClick={scrollToContent}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/50 hover:text-white transition-colors"
+          className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 text-white/40 hover:text-white/70 transition-colors"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.8, duration: 1 }}
+          transition={{ delay: 1.6, duration: 0.8 }}
+          aria-label="Scroll to content"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-3"
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           >
-            <span 
-              className="text-[10px] tracking-[0.3em] uppercase"
-              style={{ fontFamily: 'Inter, sans-serif' }}
-            >
-              Explore
-            </span>
-            <ArrowDown size={16} />
+            <ChevronDown size={24} />
           </motion.div>
         </motion.button>
       </div>
