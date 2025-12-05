@@ -36,7 +36,7 @@ const Hero = () => {
     const ctx = gsap.context(() => {
       // Parallax effect on scroll
       gsap.to(".hero-bg", {
-        yPercent: 30,
+        yPercent: 20,
         ease: "none",
         scrollTrigger: {
           trigger: heroRef.current,
@@ -45,6 +45,18 @@ const Hero = () => {
           scrub: true,
         },
       });
+      
+      // Animate the cross
+      gsap.fromTo(".hero-cross",
+        { scale: 0, opacity: 0, rotation: -180 },
+        { scale: 1, opacity: 1, rotation: 0, duration: 1.5, ease: "elastic.out(1, 0.5)", delay: 0.3 }
+      );
+      
+      // Animate the rays
+      gsap.fromTo(".hero-rays",
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 2, ease: "power2.out", delay: 0.6 }
+      );
     }, heroRef);
 
     return () => ctx.revert();
@@ -55,46 +67,108 @@ const Hero = () => {
       ref={heroRef} 
       className="relative w-full min-h-screen overflow-hidden"
     >
-      {/* Background Layers - Celestial Blue Theme */}
+      {/* Background - Pure White with Divine Light */}
       <div className="hero-bg absolute inset-0">
-        {/* Base Gradient - Deep Celestial Blue */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-[hsl(205,40%,10%)] to-[hsl(205,35%,15%)]" />
+        {/* Base - Pure White */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-[hsl(45,25%,98%)] to-[hsl(40,20%,96%)]" />
         
-        {/* Animated Aurora - Blue & White Theme */}
-        <div className="absolute inset-0 opacity-40">
-          <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-celestial-blue-light rounded-full filter blur-[150px] animate-float opacity-30" />
-          <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-celestial-white rounded-full filter blur-[150px] animate-float-subtle opacity-15" style={{ animationDelay: '-2s' }} />
-          <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-celestial-blue rounded-full filter blur-[150px] animate-float opacity-20" style={{ animationDelay: '-4s' }} />
-        </div>
-
-        {/* Cross Pattern */}
-        <div className="absolute inset-0 opacity-5 cross-pattern" />
+        {/* Divine Golden Light from Top */}
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 120% 70% at 50% -20%, hsl(43 90% 52% / 0.15) 0%, transparent 50%),
+              radial-gradient(ellipse 80% 50% at 50% 0%, hsl(45 95% 65% / 0.1) 0%, transparent 40%)
+            `
+          }}
+        />
         
-        {/* Radial Vignette */}
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-background/80" />
+        {/* Subtle warm ambient orbs */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[hsl(43,90%,52%)] rounded-full filter blur-[200px] opacity-[0.06] animate-float" />
+        <div className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-[hsl(210,70%,48%)] rounded-full filter blur-[200px] opacity-[0.04] animate-float-subtle" style={{ animationDelay: '-3s' }} />
         
-        {/* Top Divine White Glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-celestial-white rounded-full filter blur-[200px] opacity-10" />
+        {/* Cross Pattern - Gold */}
+        <div className="absolute inset-0 opacity-[0.03] cross-pattern" />
+        
+        {/* Soft Vignette */}
+        <div className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-white/50" />
       </div>
 
-      {/* Floating Particles - White */}
+      {/* Animated Divine Rays */}
+      <div className="hero-rays absolute inset-0 flex items-center justify-center pointer-events-none opacity-0">
+        <div 
+          className="absolute w-[200%] h-[200%] animate-divine-rays"
+          style={{
+            background: `
+              conic-gradient(
+                from 0deg at 50% 50%,
+                transparent 0deg,
+                hsl(43 90% 52% / 0.02) 15deg,
+                transparent 30deg,
+                hsl(43 90% 52% / 0.02) 45deg,
+                transparent 60deg,
+                hsl(43 90% 52% / 0.02) 75deg,
+                transparent 90deg,
+                hsl(43 90% 52% / 0.02) 105deg,
+                transparent 120deg,
+                hsl(43 90% 52% / 0.02) 135deg,
+                transparent 150deg,
+                hsl(43 90% 52% / 0.02) 165deg,
+                transparent 180deg,
+                hsl(43 90% 52% / 0.02) 195deg,
+                transparent 210deg,
+                hsl(43 90% 52% / 0.02) 225deg,
+                transparent 240deg,
+                hsl(43 90% 52% / 0.02) 255deg,
+                transparent 270deg,
+                hsl(43 90% 52% / 0.02) 285deg,
+                transparent 300deg,
+                hsl(43 90% 52% / 0.02) 315deg,
+                transparent 330deg,
+                hsl(43 90% 52% / 0.02) 345deg,
+                transparent 360deg
+              )
+            `
+          }}
+        />
+      </div>
+
+      {/* Decorative Gold Cross */}
+      <div className="hero-cross absolute top-[12%] left-1/2 -translate-x-1/2 opacity-0 pointer-events-none z-10">
+        <div className="relative">
+          {/* Cross Glow */}
+          <div className="absolute inset-0 blur-xl animate-pulse-gold">
+            <div className="w-1.5 h-28 bg-gradient-to-b from-transparent via-[hsl(43,90%,52%)] to-transparent mx-auto" />
+            <div className="w-20 h-1.5 bg-gradient-to-r from-transparent via-[hsl(43,90%,52%)] to-transparent absolute top-7 left-1/2 -translate-x-1/2" />
+          </div>
+          {/* Cross Main */}
+          <div className="relative animate-cross-glow">
+            <div className="w-1.5 h-28 bg-gradient-to-b from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(40,85%,42%)] mx-auto rounded-full" />
+            <div className="w-20 h-1.5 bg-gradient-to-r from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(40,85%,42%)] absolute top-7 left-1/2 -translate-x-1/2 rounded-full" />
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Gold Particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-secondary/40 rounded-full"
+            className="absolute w-1.5 h-1.5 rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              background: `hsl(43 90% ${50 + Math.random() * 20}%)`,
             }}
             animate={{
-              y: [0, -100, 0],
-              opacity: [0, 1, 0],
+              y: [0, -80, 0],
+              opacity: [0, 0.6, 0],
+              scale: [0.5, 1, 0.5],
             }}
             transition={{
-              duration: 4 + Math.random() * 4,
+              duration: 5 + Math.random() * 5,
               repeat: Infinity,
-              delay: Math.random() * 4,
+              delay: Math.random() * 5,
               ease: "easeInOut",
             }}
           />
@@ -104,16 +178,16 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col justify-center items-center min-h-screen text-center px-4 py-32">
         <div ref={textRef} className="max-w-5xl mx-auto">
-          {/* Pre-title */}
+          {/* Pre-title Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="mb-8"
+            className="mb-10"
           >
-            <span className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-secondary/30 bg-secondary/5 backdrop-blur-sm">
-              <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-              <span className="text-secondary text-xs font-heading tracking-[0.3em] uppercase">
+            <span className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[hsl(43,90%,52%,0.1)] border border-[hsl(43,90%,52%,0.3)] backdrop-blur-sm">
+              <span className="w-2 h-2 bg-[hsl(43,90%,52%)] rounded-full animate-pulse" />
+              <span className="text-[hsl(40,85%,35%)] text-xs font-semibold tracking-[0.25em] uppercase">
                 The Latter House Glory
               </span>
             </span>
@@ -121,22 +195,34 @@ const Hero = () => {
 
           {/* Main Title */}
           <motion.h1 
-            className="font-heading font-bold leading-none mb-6"
+            className="leading-none mb-8"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 1, ease: "easeOut" }}
           >
-            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gradient-white tracking-wide">
+            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-wide text-gradient-gold">
               GLADE
             </span>
-            <span className="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-gradient-blue tracking-wide mt-2">
+            <span className="block text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[0.15em] text-[hsl(210,70%,48%)] mt-2">
               CATHEDRAL
             </span>
           </motion.h1>
 
+          {/* Gold Decorative Line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="flex items-center justify-center gap-4 my-8"
+          >
+            <div className="w-20 sm:w-32 h-px bg-gradient-to-r from-transparent via-[hsl(43,90%,52%)] to-[hsl(43,90%,52%)]" />
+            <div className="w-3 h-3 rotate-45 bg-[hsl(43,90%,52%)] shadow-[0_0_15px_hsl(43,90%,52%,0.5)]" />
+            <div className="w-20 sm:w-32 h-px bg-gradient-to-l from-transparent via-[hsl(43,90%,52%)] to-[hsl(43,90%,52%)]" />
+          </motion.div>
+
           {/* Subtitle */}
           <motion.p
-            className="text-lg md:text-xl text-foreground/70 font-body font-light tracking-wide max-w-2xl mx-auto mb-12"
+            className="text-lg md:text-xl text-[hsl(220,15%,40%)] font-light tracking-wide max-w-2xl mx-auto mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1, duration: 1 }}
@@ -152,26 +238,30 @@ const Hero = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.2, duration: 0.8 }}
           >
-            <p className="text-xs font-heading tracking-[0.3em] uppercase text-secondary mb-6">
+            <p className="text-xs font-semibold tracking-[0.3em] uppercase text-[hsl(40,85%,35%)] mb-6">
               Annual Harvest Thanksgiving
             </p>
-            <div className="inline-flex items-center gap-2 md:gap-4 glass-card px-6 md:px-10 py-6 md:py-8">
+            <div className="inline-flex items-center gap-3 sm:gap-4">
               {[
                 { val: timeLeft.days, label: "Days" },
                 { val: timeLeft.hours, label: "Hours" },
                 { val: timeLeft.minutes, label: "Mins" },
                 { val: timeLeft.seconds, label: "Secs" }
               ].map((item, i) => (
-                <div key={i} className="flex flex-col items-center px-3 md:px-6">
-                  <span className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient-white tabular-nums">
-                    {String(item.val).padStart(2, '0')}
-                  </span>
-                  <span className="text-[10px] md:text-xs uppercase tracking-widest text-foreground/50 mt-2">
+                <div key={i} className="flex flex-col items-center">
+                  <div className="relative">
+                    <div className="w-16 sm:w-20 h-16 sm:h-20 rounded-xl bg-white border-2 border-[hsl(43,90%,52%,0.3)] shadow-lg flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-2xl sm:text-3xl font-bold text-gradient-gold tabular-nums">
+                        {String(item.val).padStart(2, '0')}
+                      </span>
+                    </div>
+                    {/* Corner accents */}
+                    <div className="absolute -top-px -right-px w-4 h-4 border-t-2 border-r-2 border-[hsl(43,90%,52%,0.5)] rounded-tr-lg" />
+                    <div className="absolute -bottom-px -left-px w-4 h-4 border-b-2 border-l-2 border-[hsl(43,90%,52%,0.5)] rounded-bl-lg" />
+                  </div>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-widest text-[hsl(220,15%,50%)] mt-3 font-medium">
                     {item.label}
                   </span>
-                  {i < 3 && (
-                    <span className="absolute right-0 top-1/2 -translate-y-1/2 text-secondary/30 text-2xl hidden md:block">:</span>
-                  )}
                 </div>
               ))}
             </div>
@@ -185,7 +275,7 @@ const Hero = () => {
             transition={{ delay: 1.4, duration: 0.8 }}
           >
             <motion.button
-              className="btn-premium flex items-center justify-center gap-3"
+              className="btn-gold flex items-center justify-center gap-3"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -193,7 +283,7 @@ const Hero = () => {
               <span>Watch Harvest Live</span>
             </motion.button>
             <motion.button
-              className="btn-outline-premium flex items-center justify-center gap-3"
+              className="btn-dark flex items-center justify-center gap-3"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -211,18 +301,18 @@ const Hero = () => {
           transition={{ delay: 1.6, duration: 1 }}
         >
           <motion.div
-            className="flex flex-col items-center gap-2 text-foreground/30 cursor-pointer hover:text-secondary transition-colors"
-            animate={{ y: [0, 10, 0] }}
+            className="flex flex-col items-center gap-2 text-[hsl(220,15%,60%)] cursor-pointer hover:text-[hsl(43,90%,45%)] transition-colors"
+            animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
-            <span className="text-[10px] font-heading tracking-[0.3em] uppercase">Scroll</span>
+            <span className="text-[10px] font-semibold tracking-[0.3em] uppercase">Explore</span>
             <FaChevronDown size={16} />
           </motion.div>
         </motion.div>
       </div>
 
       {/* Bottom Gradient Fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[hsl(40,20%,96%)] to-transparent pointer-events-none" />
     </section>
   );
 };

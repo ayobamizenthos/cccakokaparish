@@ -52,10 +52,10 @@ const Navigation = memo(() => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-luxury shadow-elegant border-b border-primary/20"
-          : "bg-gradient-to-b from-background/80 to-transparent"
+          ? "bg-white/98 backdrop-blur-xl shadow-lg border-b border-[hsl(43,90%,52%,0.15)]"
+          : "bg-gradient-to-b from-white/90 to-transparent"
       }`}
     >
       <div className="container mx-auto px-4">
@@ -69,10 +69,10 @@ const Navigation = memo(() => {
               <LazyImage
                 src="/ccc-rainbow-logo.png"
                 alt="Celestial Church of Christ Logo"
-                className="h-16 md:h-20 w-auto object-contain transition-all duration-500 drop-shadow-[0_0_15px_rgba(74,144,217,0.3)]"
+                className="h-16 md:h-20 w-auto object-contain transition-all duration-500 drop-shadow-[0_4px_20px_rgba(212,165,48,0.3)]"
               />
             </motion.div>
-            <span className="text-xs md:text-sm font-heading font-medium tracking-luxury text-secondary mt-1">
+            <span className="text-xs md:text-sm font-semibold tracking-[0.2em] text-[hsl(40,85%,35%)] mt-1">
               AKOKA PARISH
             </span>
           </Link>
@@ -88,18 +88,18 @@ const Navigation = memo(() => {
                 {link.isRoute ? (
                   <Link
                     to={link.href}
-                    className="px-4 py-2.5 text-xs font-body font-medium tracking-wider uppercase text-foreground/80 hover:text-secondary transition-all duration-300 relative group"
+                    className="px-4 py-2.5 text-xs font-medium tracking-wider uppercase text-[hsl(220,15%,35%)] hover:text-[hsl(43,90%,45%)] transition-all duration-300 relative group"
                   >
                     {link.name}
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-500" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(45,95%,65%)] group-hover:w-3/4 transition-all duration-300 rounded-full" />
                   </Link>
                 ) : (
                   <a
                     href={link.href}
-                    className="px-4 py-2.5 text-xs font-body font-medium tracking-wider uppercase text-foreground/80 hover:text-secondary transition-all duration-300 relative group"
+                    className="px-4 py-2.5 text-xs font-medium tracking-wider uppercase text-[hsl(220,15%,35%)] hover:text-[hsl(43,90%,45%)] transition-all duration-300 relative group"
                   >
                     {link.name}
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent group-hover:w-full transition-all duration-500" />
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[hsl(45,95%,65%)] via-[hsl(43,90%,52%)] to-[hsl(45,95%,65%)] group-hover:w-3/4 transition-all duration-300 rounded-full" />
                   </a>
                 )}
               </motion.div>
@@ -112,7 +112,7 @@ const Navigation = memo(() => {
               <Button 
                 variant="outline" 
                 size="sm" 
-                className="border-2 border-primary/50 text-foreground hover:bg-primary/10 hover:border-primary font-heading tracking-wider text-xs uppercase px-6"
+                className="border-2 border-[hsl(210,70%,48%)] text-[hsl(210,70%,45%)] hover:bg-[hsl(210,70%,48%,0.1)] hover:border-[hsl(210,70%,45%)] font-semibold tracking-wider text-xs uppercase px-6 rounded-lg"
               >
                 Join Live
               </Button>
@@ -120,7 +120,7 @@ const Navigation = memo(() => {
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button
                 size="sm"
-                className="bg-secondary text-secondary-foreground font-heading tracking-wider text-xs uppercase px-6 shadow-glow-white hover:shadow-divine transition-all duration-500"
+                className="btn-gold text-xs px-6 py-2 rounded-lg"
                 asChild
               >
                 <a href="mailto:cccakokaparish@yahoo.com?subject=Request for Church Account Details&body=Hello, I'd like to request the account details for making a donation to CCC Akoka Parish. Thank you.">
@@ -132,13 +132,13 @@ const Navigation = memo(() => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="xl:hidden p-3 text-foreground hover:text-primary transition-colors"
+            className="xl:hidden p-3 text-[hsl(220,30%,25%)] hover:text-[hsl(43,90%,45%)] transition-colors rounded-lg border border-[hsl(43,90%,52%,0.2)] hover:border-[hsl(43,90%,52%,0.4)] hover:bg-[hsl(43,90%,52%,0.05)]"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-controls="mobile-navigation"
             aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
             <AnimatePresence mode="wait">
               {isMobileMenuOpen ? (
@@ -149,7 +149,7 @@ const Navigation = memo(() => {
                   exit={{ rotate: 90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <X size={28} />
+                  <X size={24} />
                 </motion.div>
               ) : (
                 <motion.div
@@ -159,7 +159,7 @@ const Navigation = memo(() => {
                   exit={{ rotate: -90, opacity: 0 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Menu size={28} />
+                  <Menu size={24} />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -172,7 +172,7 @@ const Navigation = memo(() => {
             <motion.div
               ref={mobileMenuRef}
               id="mobile-navigation"
-              className="xl:hidden py-6 bg-background/98 backdrop-blur-luxury border-t border-primary/20"
+              className="xl:hidden py-6 bg-white/98 backdrop-blur-xl border-t border-[hsl(43,90%,52%,0.15)]"
               role="navigation"
               aria-label="Mobile navigation menu"
               initial={{ opacity: 0, height: 0 }}
@@ -197,18 +197,20 @@ const Navigation = memo(() => {
                       <Link
                         ref={index === 0 ? firstMenuItemRef : null}
                         to={link.href}
-                        className="px-4 py-3 text-sm font-heading tracking-wider text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all duration-300 block"
+                        className="flex items-center px-4 py-3 text-sm font-medium tracking-wide text-[hsl(220,15%,35%)] hover:text-[hsl(43,90%,45%)] hover:bg-[hsl(43,90%,52%,0.05)] rounded-lg transition-all duration-300"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[hsl(43,90%,52%,0.3)] group-hover:bg-[hsl(43,90%,52%)] mr-3 transition-colors" />
                         {link.name}
                       </Link>
                     ) : (
                       <a
                         ref={index === 0 ? firstMenuItemRef : null}
                         href={link.href}
-                        className="px-4 py-3 text-sm font-heading tracking-wider text-foreground hover:text-primary hover:bg-primary/5 rounded-lg transition-all duration-300 block"
+                        className="flex items-center px-4 py-3 text-sm font-medium tracking-wide text-[hsl(220,15%,35%)] hover:text-[hsl(43,90%,45%)] hover:bg-[hsl(43,90%,52%,0.05)] rounded-lg transition-all duration-300"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
+                        <span className="w-1.5 h-1.5 rounded-full bg-[hsl(43,90%,52%,0.3)] group-hover:bg-[hsl(43,90%,52%)] mr-3 transition-colors" />
                         {link.name}
                       </a>
                     )}
@@ -222,12 +224,12 @@ const Navigation = memo(() => {
                 >
                   <Button 
                     variant="outline" 
-                    className="w-full border-2 border-primary/50 text-foreground hover:bg-primary/10 font-heading tracking-wider"
+                    className="w-full border-2 border-[hsl(210,70%,48%)] text-[hsl(210,70%,45%)] hover:bg-[hsl(210,70%,48%,0.1)] font-semibold tracking-wider rounded-lg"
                   >
                     Join Live
                   </Button>
                   <Button
-                    className="w-full bg-secondary text-secondary-foreground font-heading tracking-wider shadow-glow-white"
+                    className="w-full btn-gold rounded-lg"
                     asChild
                   >
                     <a href="mailto:cccakokaparish@yahoo.com?subject=Request for Church Account Details&body=Hello, I'd like to request the account details for making a donation to CCC Akoka Parish. Thank you.">
